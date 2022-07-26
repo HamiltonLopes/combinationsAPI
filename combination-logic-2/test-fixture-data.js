@@ -1,5 +1,5 @@
-export const produto = 'camisa'
-export const pedidos = [
+ const produto = 'camisa'
+ const pedidos = [
     { 
         items: [ 
             'calça', 
@@ -64,3 +64,9 @@ export const pedidos = [
 },
 
 ]
+
+
+module.exports =  {
+  produto,
+  pedidos
+}
