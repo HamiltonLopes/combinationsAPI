@@ -43,39 +43,30 @@ for (const item of products) {
         for (const subItem of products) { 
             if (!!combinations[item][subItem] && (!topCombinations[2] || combinations[item][subItem] >= getApparitions(2))) { 
                 if (!topCombinations[0] || combinations[item][subItem] >= getApparitions(0)) { 
-                    topCombinations[2] = topCombinations[1]; 
-                    topCombinations[1] = topCombinations[0];
-                    topCombinations[0] = {
-                         [item]: { 
-                            [subItem]: combinations[item][subItem] 
-                        } 
-                    } 
-                } else if (!topCombinations[1] || combinations[item][subItem] >= getApparitions(1)) { 
-                    topCombinations[2] = topCombinations[1]; 
-                    topCombinations[1] = { 
+                    topCombinations.push({
                         [item]: { 
-                            [subItem]: combinations[item][subItem] 
-                        } 
-                    } 
+                           [subItem]: combinations[item][subItem] 
+                       } 
+                    });
+                    changePosition(topCombinations.length-1,0); 
+                } else if (!topCombinations[1] || combinations[item][subItem] >= getApparitions(1)) { 
+                    topCombinations.push({
+                        [item]: { 
+                           [subItem]: combinations[item][subItem] 
+                       } 
+                    });
+                    changePosition(topCombinations.length-1,1);
                 } else { 
                     topCombinations[2] = { 
                         [item]: { 
                             [subItem]: combinations[item][subItem] 
                         } 
                     } 
-                } 
+                }
             } 
         } 
     } 
 }
 
-console.log(topCombinations);
-topCombinations.push({
-    "AddExample":{
-        "any":2
-    }
-});
-console.log(topCombinations);
-changePosition(topCombinations.length-1,0);
 console.log(topCombinations);
 
