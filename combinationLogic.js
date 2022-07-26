@@ -1,15 +1,15 @@
-var products = ["item1", "item2", "item3", "item4", "item5", "item6"] 
-var pedido1 = { products: ["item1", "item2"] } 
-var pedido2 = { products: ["item1", "item4"] } 
-var pedido3 = { products: ["item1", "item6", "item2", "item5"] } 
-var pedido4 = { products: ["item6", "item2", "item5"] } 
-var pedido5 = { products: ["item2", "item4", "item1", "item3"] } 
-var pedido6 = { products: ["item2", "item4", "item1", "item3", "item5"] } 
-var pedido7 = { products: ["item6", "item1", "item5"] } 
-var pedido8 = { products: ["item3", "item4", "item1"] } 
-var pedido9 = { products: ["item6", "item4", "item5", "item1"] } 
-var orders = [pedido1, pedido2, pedido3, pedido4, pedido5, pedido6, pedido7, pedido8, pedido9] 
-var combinations = {} 
+const products = ["item1", "item2", "item3", "item4", "item5", "item6"];
+const pedido1 = { products: ["item1", "item2"] };
+const pedido2 = { products: ["item1", "item4"] };
+const pedido3 = { products: ["item1", "item6", "item2", "item5"] };
+const pedido4 = { products: ["item6", "item2", "item5"] }; 
+const pedido5 = { products: ["item2", "item4", "item1", "item3"] };
+const pedido6 = { products: ["item2", "item4", "item1", "item3", "item5"] };
+const pedido7 = { products: ["item6", "item1", "item5"] }; 
+const pedido8 = { products: ["item3", "item4", "item1"] }; 
+const pedido9 = { products: ["item6", "item4", "item5", "item1"] };
+const orders = [pedido1, pedido2, pedido3, pedido4, pedido5, pedido6, pedido7, pedido8, pedido9];
+const combinations = {}; 
 const NUMBER_OF_COMBINATIONS = 3;
 
 for (const item of products) {
@@ -33,11 +33,11 @@ for (const item of products) {
 }
 
 var topCombinations = []
-var getApparitions = (index) => {
+const getApparitions = (index) => {
     return topCombinations[index][Object.getOwnPropertyNames(topCombinations[index])][Object.getOwnPropertyNames(topCombinations[index][Object.getOwnPropertyNames(topCombinations[index])])];
 }
 
-var changePosition = (from,to) => {
+const changePosition = (from,to) => {
     return topCombinations.splice(to, 0, topCombinations.splice(from, 1)[0]);
 }
 
@@ -62,7 +62,7 @@ for (const item of products) {
                                 [item]: { 
                                    [subItem]: combinations[item][subItem] 
                                } 
-                            }
+                            };
                         }
                     }     
                 }
