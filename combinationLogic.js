@@ -10,6 +10,7 @@ var pedido8 = { products: ["item3", "item4", "item1"] }
 var pedido9 = { products: ["item6", "item4", "item5", "item1"] } 
 var orders = [pedido1, pedido2, pedido3, pedido4, pedido5, pedido6, pedido7, pedido8, pedido9] 
 var combinations = {} 
+const NUMBER_OF_COMBINATIONS = 3;
 
 for (const item of products) {
     for (const pedido of orders) {
@@ -20,9 +21,11 @@ for (const item of products) {
                         ...combinations, 
                         [item]: { 
                             ...combinations[item],
-                             [subItems]: (!!combinations[item] ? (!!combinations[item][subItems] ? combinations[item][subItems] + 1 : 1) : 1) 
+                             [subItems]: 
+                                (!!combinations[item] ? (!!combinations[item][subItems] ? combinations[item][subItems] + 1 : 1) 
+                                    : 1) 
                         } 
-                    } 
+                    }; 
                 } 
             }
         }
@@ -41,27 +44,27 @@ var changePosition = (from,to) => {
 for (const item of products) { 
     if (!!combinations[item]) { 
         for (const subItem of products) { 
-            if (!!combinations[item][subItem] && (!topCombinations[2] || combinations[item][subItem] >= getApparitions(2))) { 
-                if (!topCombinations[0] || combinations[item][subItem] >= getApparitions(0)) { 
-                    topCombinations.push({
-                        [item]: { 
-                           [subItem]: combinations[item][subItem] 
-                       } 
-                    });
-                    changePosition(topCombinations.length-1,0); 
-                } else if (!topCombinations[1] || combinations[item][subItem] >= getApparitions(1)) { 
-                    topCombinations.push({
-                        [item]: { 
-                           [subItem]: combinations[item][subItem] 
-                       } 
-                    });
-                    changePosition(topCombinations.length-1,1);
-                } else { 
-                    topCombinations[2] = { 
-                        [item]: { 
-                            [subItem]: combinations[item][subItem] 
-                        } 
-                    } 
+            if (!!combinations[item][subItem] && (!topCombinations[NUMBER_OF_COMBINATIONS - 1] 
+                    || combinations[item][subItem] >= getApparitions(NUMBER_OF_COMBINATIONS - 1))) { 
+                for(let i = 0; i < NUMBER_OF_COMBINATIONS; i++){
+                    if (!topCombinations[i] || combinations[item][subItem] >= getApparitions(i)) {
+                        if( i !== NUMBER_OF_COMBINATIONS-1){
+                            topCombinations.push({
+                                [item]: { 
+                                   [subItem]: combinations[item][subItem] 
+                               } 
+                            });
+                            changePosition(topCombinations.length-1,i);
+                            if(topCombinations.length > NUMBER_OF_COMBINATIONS) topCombinations.splice(-1);
+                            break;     
+                        } else {
+                            topCombinations[i] = {
+                                [item]: { 
+                                   [subItem]: combinations[item][subItem] 
+                               } 
+                            }
+                        }
+                    }     
                 }
             } 
         } 
