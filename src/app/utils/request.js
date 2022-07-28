@@ -1,5 +1,6 @@
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 
+const { AxiosError } = axios;
 export class Request {
   constructor( request = axios) { this.request = request }
 

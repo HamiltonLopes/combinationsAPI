@@ -1,5 +1,5 @@
-import { RequestError, ServerError } from '../err/errors'
-import * as HttpUtil from '../utils/request'
+import { RequestError, ServerError } from '../err/errors.js'
+import * as HttpUtil from '../utils/request.js'
 
 
 

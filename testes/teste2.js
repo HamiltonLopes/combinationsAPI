@@ -26,7 +26,16 @@ const addTopCombination = (obj) =>{
         if((Object.keys(obj)[0] === Object.keys(topCombinations[j])[0]) && (Object.values(Object.values(obj)[0])[0] === Object.keys(Object.values(topCombinations[j])[0])[0])){
             const newAparritionsValue = +Object.keys(Object.values(obj)[0])[0] + +Object.values(Object.values(topCombinations[j])[0])[0];
             topCombinations.splice(j,1);
+
+            //return addTopCombination({[Object.keys(obj)[0]]:{[newAparritionsValue] : Object.values(Object.values(obj)[0])[0]}});
             return topCombinations.splice(j, 0, {[Object.keys(obj)[0]]:{[Object.values(Object.values(obj)[0])[0]] : newAparritionsValue}});
+        }
+    }
+    for(const combKey of topCombinations){
+        if(Object.keys(combKey)[0] === Object.values(Object.values(obj)[0])[0]){
+            if(Object.keys(Object.values(combKey)[0])[0] === Object.keys(obj)[0]){
+                return null;
+            }
         }
     }
     if(addIndex !== -1){ 
@@ -64,11 +73,30 @@ obj[item].combinations = mergeSort(obj[item].combinations);
 
 console.log(obj[item]);
 console.log(topCombinations);
-// var obej = {"camisa":{"1":"bone"}};
-// addTopCombination(obej);
-// addTopCombination(obej);
-// addTopCombination(obej);
-// console.log(topCombinations);
+var obej = {"camisa":{"1":"bone"}};
+var obej2 = {"camisa":{"1":"tenis"}};
+var obej3 = {"camisa":{"1":"sacola"}};
+addTopCombination(obej);
+addTopCombination(obej);
+addTopCombination(obej);
+addTopCombination(obej2);
+addTopCombination(obej2);
+addTopCombination(obej2);
+addTopCombination(obej3);
+addTopCombination(obej3);
+addTopCombination(obej3);
+console.log(topCombinations);
+addTopCombination(obej3);
+console.log(topCombinations);
+addTopCombination({"camisa":{"3":"paco"}});
+addTopCombination({"camisa":{"1":"paco"}});
+addTopCombination({"camisa":{"1":"paco"}});
+addTopCombination({"camisa":{"1":"paco"}});
+addTopCombination({"camisa":{"1":"paco"}});
+console.log(topCombinations);
+addTopCombination({"paco":{"7":"camisa"}});
+console.log(topCombinations);
+
 
 
 
