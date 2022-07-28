@@ -1,6 +1,4 @@
-var obj_test = { item2: 4, item4: 6, item6: 4, item5: 3, item3: 3 };
-
-
+// var obj_test = { item2: 4, item4: 6, item6: 4, item5: 3, item3: 3 };
 function array_to_object(arr) {
     var rv = {};
     for (var i = 0; i < arr.length; ++i)
@@ -8,7 +6,7 @@ function array_to_object(arr) {
     return rv;
 }
 
-function array_sort_subitens(obj_sort) {
+ export function array_sort_subitens(obj_sort) {
     var key = Object.keys(obj_sort)
 
     var result = key.map(function (key) {
@@ -21,10 +19,11 @@ function array_sort_subitens(obj_sort) {
         return 0;
     }
     );
-    return result
+
+    var obj_ =array_to_object(result);
+
+    return obj_
 }
 
-var subitens_sort = array_sort_subitens(obj_test);
-var obj_sort = array_to_object(subitens_sort);
 
-console.log(obj_sort)
+// console.log(array_sort_subitens(obj_test))

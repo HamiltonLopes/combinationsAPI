@@ -1,3 +1,4 @@
+import { array_sort_subitens } from '../testes/teste2_sort_subitens.js'
 const products = ["item1", "item2", "item3", "item4", "item5", "item6"];
 const pedido1 = { products: ["item1", "item2"] };
 const pedido2 = { products: ["item1", "item4", "item6"] };
@@ -31,72 +32,54 @@ for (const item of products) {
                                     : 1)
                         }
                     };
+                    combinations[item]=array_sort_subitens(combinations[item]);
                 }
             }
         }
     }
 }
-
-function quicksort() {
-
-}
-
-
-// combinations = { 
-//     ...combinations, 
-//     [item]: { 
-//         ...combinations[item],
-//         "combinations": [
-//             {[qtd]:[subItem]},
-//             {[qtd]:[subItem]},
-//             {[qtd]:[subItem]},
-//             {[qtd]:[subItem]}
-//          ]
-
-//     } 
-// };
-
 
 console.log(combinations);
-var topCombinations = [];
-const getApparitions = (index) => {
-    return topCombinations[index][Object.getOwnPropertyNames(topCombinations[index])][Object.getOwnPropertyNames(topCombinations[index][Object.getOwnPropertyNames(topCombinations[index])])];
-}
 
-const changePosition = (from, to) => {
-    return topCombinations.splice(to, 0, topCombinations.splice(from, 1)[0]);
-}
+// var topCombinations = [];
+// const getApparitions = (index) => {
+//     return topCombinations[index][Object.getOwnPropertyNames(topCombinations[index])][Object.getOwnPropertyNames(topCombinations[index][Object.getOwnPropertyNames(topCombinations[index])])];
+// }
 
-for (const item of products) {
-    if (!!combinations[item]) {
-        for (const subItem of products) {
-            if (!!combinations[item][subItem] && (!topCombinations[NUMBER_OF_COMBINATIONS - 1]
-                || combinations[item][subItem] >= getApparitions(NUMBER_OF_COMBINATIONS - 1))) {
-                for (let i = 0; i < NUMBER_OF_COMBINATIONS; i++) {
-                    if (!topCombinations[i] || combinations[item][subItem] >= getApparitions(i)) {
-                        if (topCombinations[i] && Object.getOwnPropertyNames(topCombinations[i])[0] === subItem) break;
+// const changePosition = (from, to) => {
+//     return topCombinations.splice(to, 0, topCombinations.splice(from, 1)[0]);
+// }
 
-                        if (i !== NUMBER_OF_COMBINATIONS - 1) {
-                            topCombinations.push({
-                                [item]: {
-                                    [subItem]: combinations[item][subItem]
-                                }
-                            });
-                            changePosition(topCombinations.length - 1, i);
-                            if (topCombinations.length > NUMBER_OF_COMBINATIONS) topCombinations.splice(-1);
-                            break;
-                        } else {
-                            topCombinations[i] = {
-                                [item]: {
-                                    [subItem]: combinations[item][subItem]
-                                }
-                            };
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
+// for (const item of products) {
+//     if (!!combinations[item]) {
+//         for (const subItem of products) {
+//             if (!!combinations[item][subItem] && (!topCombinations[NUMBER_OF_COMBINATIONS - 1]
+//                 || combinations[item][subItem] >= getApparitions(NUMBER_OF_COMBINATIONS - 1))) {
+//                 for (let i = 0; i < NUMBER_OF_COMBINATIONS; i++) {
+//                     if (!topCombinations[i] || combinations[item][subItem] >= getApparitions(i)) {
+//                         if (topCombinations[i] && Object.getOwnPropertyNames(topCombinations[i])[0] === subItem) break;
 
-console.log(topCombinations);
+//                         if (i !== NUMBER_OF_COMBINATIONS - 1) {
+//                             topCombinations.push({
+//                                 [item]: {
+//                                     [subItem]: combinations[item][subItem]
+//                                 }
+//                             });
+//                             changePosition(topCombinations.length - 1, i);
+//                             if (topCombinations.length > NUMBER_OF_COMBINATIONS) topCombinations.splice(-1);
+//                             break;
+//                         } else {
+//                             topCombinations[i] = {
+//                                 [item]: {
+//                                     [subItem]: combinations[item][subItem]
+//                                 }
+//                             };
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+
+// console.log(topCombinations);
