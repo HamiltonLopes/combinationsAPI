@@ -94,7 +94,7 @@ combinações(produto, pedidos)
     regata: 1,
     chinelo: 1,
     sandália: 1,
-    cordão: 3,
+    cordão: 7,
     totalPedidos: 9,
     pedidosSemProduto: 2
   }

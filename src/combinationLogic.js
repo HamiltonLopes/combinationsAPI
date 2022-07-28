@@ -36,6 +36,22 @@ for (const item of products) {
         }
     }
 }
+
+// combinations = { 
+//     ...combinations, 
+//     [item]: { 
+//         ...combinations[item],
+//         "combinations": [
+//             {[qtd]:[subItem]},
+//             {[qtd]:[subItem]},
+//             {[qtd]:[subItem]},
+//             {[qtd]:[subItem]}
+//          ]
+         
+//     } 
+// };
+
+
 console.log(combinations);
 var topCombinations = [];
 const getApparitions = (index) => {

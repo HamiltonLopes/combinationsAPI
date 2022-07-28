@@ -1,5 +1,5 @@
-import { RequestError, ServerError } from '../err/errors'
-import * as HttpUtil from '../utils/request'
+import { RequestError, ServerError } from '../../../err/errors'
+import * as HttpUtil from '../../../utils/request'
 
 
 
@@ -7,7 +7,7 @@ import * as HttpUtil from '../utils/request'
   CLIENT VTEX ORDER IMPLEMENTATION  
 */
 
- class VtexOrder {
+export default class VtexOrder {
   constructor ( request = new HttpUtil.Request()) {
     this.request = request
     this.appKey // process.env.APP_KEY

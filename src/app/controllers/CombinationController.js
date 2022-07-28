@@ -1,4 +1,5 @@
-import axios from 'axios';
+import VtexOrder from '../clients/client-order-by-id.js';
+import mergeSort from '../services/MergeSort.js';
 export default new class RewardsController {
 
     async store(req, res) {  //Método para receber hook config + Criar combinação de acordo com o pedido recebido
@@ -9,9 +10,44 @@ export default new class RewardsController {
         if (!State) //verifica se a váriavel estado foi passada no body da requisição
             return res.status(400).json({ "error": "Bad Request" }); //envia um erro informando requisição inválida
 
-        const orderResponse = await axios.get(`https://${process.env.ACCOUNT_NAME}.${process.env.ENVIROMENT}.com/api/oms/pvt/orders/${OrderId}`,
-            {headers:{"X-VTEX-API-AppKey": process.env.X_VTEX_API_AppKey, "X-VTEX-API-AppToken": process.env.X_VTEX_API_AppToken}}); //getOrderById captura informação do pedido pelo número do pedido
+        const { items } = await VtexOrder.fetchGetById(OrderId); //getOrderById captura informação do pedido pelo número do pedido
         
-        
+        let { combinations, topCombinations } = await; //MasterDataget
+
+        for(const item of items){ //percorre os items do pedido recebido (a partir daqui itemPrincipal)
+            if(!!combinations[item]){ //verifica se já existe combinações com o itemPrincipal
+                for(const subItem of items){ //percorre novamente os items(a partir daqui subItem) do pedido para formar as combinações, para cada item ele deve combinar com todos os outros do pedido
+                    if(subItem !== item){ //verifica se o subItem a ser combinado não é o mesmo itemPrincipal
+                        for(const i = 0; i < combinations[item].combinations.length; i++){ //percorre a lista de combinações do itemPrincipal
+                            if(Object.values(hashItem)[0] === subItem){ //verifica se existe a combinação do ItemPrincipal com o subItem
+                                combinations[item].combinations.push({  //se existir adiciona + 1 no número de aparições da combinação e insere no vetor de combinações
+                                    [+Object.keys(combinations[item].combinations[i])[0] + 1]: subItem
+                                });
+                                combinations[item].combinations.splice(i, 1); //remove o número de combinações antigas(do itemPrincipal com o subItem) do vetor de combinações
+                                combinations[item].combinations = mergeSort(obj[item].combinations); //Ordena novamente as combinações para a primeira combinação sempre ser a com maior número de aparições
+                                /*
+
+                                    INSERIR LÓGICA TOP COMBINAÇÕES
+                                
+                                */
+                                break;
+                            }
+                        }
+
+                        /*
+                        
+                            INSERIR LÓGICA CASO PERCORRA TODO O ARRAY E NÃO EXISTA O SUBITEM NAS COMBINAÇÕES DO ITEMPRINCIPAL
+                        
+                        */
+                    }
+                }
+            }else{
+                /*
+                
+                    INSERIR LÓGICA DE QUANDO O ITEM AINDA NÃO TEM COMBINAÇÕES EXISTENTES
+                
+                */
+            }
+        }
     }
 }
