@@ -84,7 +84,7 @@ for (const item of products) {
                             topCombinations[i] = {
                                 [item]: { 
                                    [subItem]: combinations[item][subItem] 
-                               } 
+                                } 
                             };
                         }
                     }     
