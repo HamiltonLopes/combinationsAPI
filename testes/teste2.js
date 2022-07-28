@@ -1,4 +1,4 @@
-import mergeSort from "./app/services/MergeSort.js";
+import mergeSort from "../src/app/services/MergeSort.js";
 
 var obj = {
     "camisaBrancaId": {
