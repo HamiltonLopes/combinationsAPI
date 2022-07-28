@@ -56,7 +56,6 @@ obj[item].combinations = mergeSort(obj[item].combinations);
 console.log(obj[item].combinations);
 console.log(topCombinations);
 var obej = {"camisa":{"2":"bone"}};
-console.log(Object.keys(Object.values(obej)[0])[0]);
 addTopCombination(obej);
 console.log(topCombinations);
 
