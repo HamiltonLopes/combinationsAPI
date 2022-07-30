@@ -14,4 +14,18 @@ export class RequestError extends Error {
   }
 }
 
+export class NotFoundError extends Error {
+  constructor ( error ) {
+    super("Sorry, Not Found")
+    this.name = 'NotFoundError'
+    this.error = error
+  }
+}
 
+export class MissingParamError extends Error {
+  constructor ( error ) {
+    super()
+    this.name = 'MissingParamError'
+    this.error = error
+  }
+}
