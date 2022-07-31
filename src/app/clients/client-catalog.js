@@ -10,14 +10,14 @@ import * as HttpUtil from '../utils/request.js'
  export class Catalog {
   constructor ( request = new HttpUtil.Request()) {
     this.request = request
-    this.appKey = process.env.X_VTEX_API_AppKey 
-    this.appToken = process.env.X_VTEX_API_AppToken
+    this.appKey = process.env.X_VTEX_API_APP_KEY 
+    this.appToken = process.env.X_VTEX_API_APP_TOKEN
     this.accountName = process.env.ACCOUNT_NAME
     this.environment = process.env.ENVIROMENT
 
   }
 
-  async  getDataById (id) {
+  async  getDataById ( id ) {
     try{
       const response = await this.request.get (
         `https://${this.accountName}.${this.environment}.com/api/catalog_system/pub/products/variations/${id}`,
