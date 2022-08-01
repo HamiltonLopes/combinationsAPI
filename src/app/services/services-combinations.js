@@ -1,8 +1,7 @@
 import { Db } from '../clients/index.js'
 import { NotFoundError } from '../err/errors.js'
-import { combinations } from '../../../fixtures/db-fixtures.js'
-//import { getCatalogItemById } from './protocols/get-product-by-id.js'
-
+import { storeTopCombinations } from './protocols/store-top-combinations.js'
+import { topCombinationsStub } from '../../../fixtures/db-fixtures.js'
 /*
   - Acessa o Db | MasterData
   - Verifica a existência do id
@@ -33,6 +32,23 @@ export class ServicesCombinations {
     console.log(retrieve)
     return retrieve;
   }
+
+  async getStoreTopCombinantions (n) {
+    const db = new Db()
+    const {topCombinations} = await db.getDocByFields()
+
+    const topN =  storeTopCombinations( n, topCombinations)
+    if (!topN) {
+      console.log('wrong')
+    }
+    console.log(topN)
+    return topN
+  }
 }
 
 
+// const r = new ServicesCombinations().getStoreTopCombinantions(3)
+// console.log(r)
+
+
+    
