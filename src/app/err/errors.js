@@ -29,3 +29,11 @@ export class MissingParamError extends Error {
     this.error = error
   }
 }
+
+export class InvalidParamError extends Error {
+  constructor ( param, error ) {
+    super(`The param ${param} is invalid`)
+    this.name = 'MissingParamError'
+    this.error = error
+  }
+}
