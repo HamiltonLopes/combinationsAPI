@@ -29,3 +29,20 @@ export class MissingParamError extends Error {
     this.error = error
   }
 }
+
+export class InvalidParamError extends Error {
+  constructor ( param, error ) {
+    super(`The param ${param} is invalid`)
+    this.name = 'MissingParamError'
+    this.error = error
+  }
+}
+
+export class InvalidTopRanking extends Error {
+  constructor (maxPositions) {
+    super()
+    this.name = "InvalidTopRanking"
+    this.message = `Sorry, I can only return a top ${maxPositions} at most`
+  }
+}
+  

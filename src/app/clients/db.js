@@ -10,8 +10,8 @@ import * as HttpUtil from '../utils/request.js'
  export class Db {
   constructor ( request = new HttpUtil.Request()) {
     this.request = request
-    this.appKey = process.env.X_VTEX_API_AppKey 
-    this.appToken = process.env.X_VTEX_API_AppToken
+    this.appKey = process.env.X_VTEX_API_APP_KEY 
+    this.appToken = process.env.X_VTEX_API_APP_TOKEN
     this.accountName = process.env.ACCOUNT_NAME
     this.environment = process.env.ENVIROMENT
     this.entityName = process.env.DATA_ENTITY_NAME

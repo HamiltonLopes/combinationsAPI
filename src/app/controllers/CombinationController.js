@@ -12,10 +12,10 @@ export default new class CombinationController {
             return res.status(400).json({ "error": "Bad Request" }); //envia um erro informando requisição inválida
 
         const { data :{items}} = await axios.get(`https://${process.env.ACCOUNT_NAME}.${process.env.ENVIROMENT}.com/api/oms/pvt/orders/${OrderId}`,
-            { headers: { "X-VTEX-API-AppKey": process.env.X_VTEX_API_AppKey, "X-VTEX-API-AppToken": process.env.X_VTEX_API_AppToken } }); //getOrderById captura informação do pedido pelo número do pedido
+            { headers: { "X-VTEX-API-AppKey": process.env.X_VTEX_API_APP_KEY, "X-VTEX-API-AppToken": process.env.X_VTEX_API_APP_TOKEN } }); //getOrderById captura informação do pedido pelo número do pedido
         const NUMBER_OF_TOP_COMBINATIONS = 3; //pegar do masterdata também?
         let { data :{combinations, topCombinations} } = await axios.get(`https://${process.env.ACCOUNT_NAME}.${process.env.ENVIROMENT}.com/api/dataentities/${process.env.DATA_ENTITY_NAME}/documents/${process.env.MASTERDATA_DOCUMENT_ID}?_fields=combinations,topCombinations`,
-            { headers: { "X-VTEX-API-AppKey": process.env.X_VTEX_API_AppKey, "X-VTEX-API-AppToken": process.env.X_VTEX_API_AppToken } });; //MasterDataget
+            { headers: { "X-VTEX-API-AppKey": process.env.X_VTEX_API_APP_KEY, "X-VTEX-API-AppToken": process.env.X_VTEX_API_APP_TOKEN } });; //MasterDataget
 
         const addTopCombination = (obj) => { //método para atualizar o vetor de melhores combinacoes
             console.log("tentaram add o obj = ",obj);
@@ -91,7 +91,7 @@ export default new class CombinationController {
                 topCombinations
             },
             {
-                headers: { "X-VTEX-API-AppKey": process.env.X_VTEX_API_AppKey, "X-VTEX-API-AppToken": process.env.X_VTEX_API_AppToken }
+                headers: { "X-VTEX-API-AppKey": process.env.X_VTEX_API_APP_KEY, "X-VTEX-API-AppToken": process.env.X_VTEX_API_APP_TOKEN }
             });
         res.status(responseUpdate.status).json({ "Response": "Ok - User's Orders Updated" });
     }
