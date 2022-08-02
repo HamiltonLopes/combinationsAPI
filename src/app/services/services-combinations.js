@@ -1,6 +1,6 @@
 import { Db } from '../clients/index.js'
-import { NotFoundError } from '../err/errors.js'
-import { storeTopCombinations } from './protocols/store-top-combinations.js'
+import { NotFoundError, InvalidTopRanking} from '../err/errors.js'
+import { storeTopCombinations, getUniqueValues, mapStoreTopCombinations } from './protocols/store-top-combinations.js'
 import { topCombinationsStub } from '../../../fixtures/db-fixtures.js'
 /*
   - Acessa o Db | MasterData
@@ -33,22 +33,31 @@ export class ServicesCombinations {
     return retrieve;
   }
 
-  async getStoreTopCombinantions (n) {
-    const db = new Db()
-    const {topCombinations} = await db.getDocByFields()
-
-    const topN =  storeTopCombinations( n, topCombinations)
-    if (!topN) {
-      console.log('wrong')
-    }
-    console.log(topN)
-    return topN
+  async getStoreTopCombinantions (wishNumber) {
+    
+      const db = new Db()
+      const {topCombinations} = await db.getDocByFields()
+  
+      const { maxPositions, topValues } = getUniqueValues(topCombinations) 
+  
+      // comparar maxPositions com número de tops desejado
+      if( wishNumber > maxPositions ) {
+          throw new InvalidTopRanking(maxPositions)
+      } 
+  
+      const positions = wishNumber || maxPositions
+  
+      const { topN } = await storeTopCombinations(positions, topCombinations)
+      const topMapped = await mapStoreTopCombinations( topN )
+  
+      topMapped["qty"] = topValues
+  
+      return { topN, topMapped }
   }
 }
 
 
-// const r = new ServicesCombinations().getStoreTopCombinantions(3)
-// console.log(r)
+
 
 
     
