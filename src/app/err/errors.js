@@ -37,3 +37,12 @@ export class InvalidParamError extends Error {
     this.error = error
   }
 }
+
+export class InvalidTopRanking extends Error {
+  constructor (maxPositions) {
+    super()
+    this.name = "InvalidTopRanking"
+    this.message = `Sorry, I can only return a top ${maxPositions} at most`
+  }
+}
+  
