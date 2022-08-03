@@ -23,9 +23,9 @@ export class ServicesCombinations {
 
     const product = combinations[productId]
     
-        const retorno = Object.entries(product.combinations)
-        for (let i = 0; i < 3; i++ ) {
-
+    const retorno = Object.entries(product.combinations)
+    for (let i = 0; i < 3; i++ ) {
+      
         //console.log(retorno[i][1])
         // retrieve['id'] = value
         // retrieve['qty'] = key
@@ -39,25 +39,19 @@ export class ServicesCombinations {
   }
 
   async getStoreTopCombinantions (wishNumber) {
-    
       const db = new Db()
       const {topCombinations} = await db.getDocByFields()
   
-      const { maxPositions, topValues } = getUniqueValues(topCombinations) 
-  
+      const { maxPositions, topValues } = await getUniqueValues(topCombinations) 
       // comparar maxPositions com número de tops desejado
       if( wishNumber > maxPositions ) {
           throw new InvalidTopRanking(maxPositions)
       } 
+      const { topN } = await storeTopCombinations(maxPositions, topCombinations)
+      const topStore = await mapStoreTopCombinations( topN,  wishNumber)
+      topStore["qty"] = topValues
   
-      const positions = wishNumber || maxPositions
-  
-      const { topN } = await storeTopCombinations(positions, topCombinations)
-      const topMapped = await mapStoreTopCombinations( topN )
-  
-      topMapped["qty"] = topValues
-  
-      return { topN, topMapped }
+      return { topStore }
   }
 }
 
