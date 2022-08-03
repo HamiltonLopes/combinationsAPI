@@ -1,5 +1,5 @@
 import { RequestError, ServerError } from '../presentation/err/errors.js'
-import * as HttpUtil from '../app/utils/request.js'
+import * as HttpUtil from '../utils/request.js'
 
 /*
   Hook IMPLEMENTATION | SUGESTÃO: PODE SER CHAMADO AO STARTAR A APP 
