@@ -1,4 +1,4 @@
-import { Db } from '../clients/index.js'
+import { Db } from '../../clients/index.js'
 import { NotFoundError, InvalidTopRanking } from '../err/errors.js'
 import { storeTopCombinations, getUniqueValues, mapStoreTopCombinations } from './protocols/store-top-combinations.js'
 import { topCombinationsStub } from '../../../fixtures/db-fixtures.js'
