@@ -1,5 +1,5 @@
-import { MissingParamError } from "../../app/err/errors.js"
-import { ServicesCombinations } from "../../app/services/services-combinations.js"
+import { MissingParamError } from "../err/errors"
+import { ServicesCombinations } from "../../services/services-combinations.js"
 
 /*
   - Valida o parametro do request
