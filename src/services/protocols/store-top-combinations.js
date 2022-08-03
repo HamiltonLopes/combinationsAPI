@@ -2,6 +2,9 @@ import { topCombinationsStub } from "../../../../fixtures/db-fixtures.js"
 import { InvalidParamError } from "../../err/errors.js"
 
 
+/*
+  TopN Object Factory
+*/
 export const maketopN = (n) => {
   const topN= {}
   for (let i = 1 ; i <= n; i++) {
@@ -10,6 +13,9 @@ export const maketopN = (n) => {
   return { topN }
 }
 
+/*
+  Logic to get Top Combinations of Store 
+*/
 export const storeTopCombinations = async (maxPositions, topCombinations ) => {
   
     const { topN } =  maketopN(maxPositions) 
@@ -68,6 +74,9 @@ export const storeTopCombinations = async (maxPositions, topCombinations ) => {
       return { topN }
 }
 
+/*
+  Logic to map the return of Store Top Combinations Method
+*/
 export const mapStoreTopCombinations = async (unmappedData, wishNumber) => {
     let obj = unmappedData
     const properties = Object.keys(obj)
@@ -86,6 +95,9 @@ export const mapStoreTopCombinations = async (unmappedData, wishNumber) => {
     return topN
 }
 
+/*
+  Logic to remove duplicate key
+*/
 export const getUniqueValues = async ( arr ) => {
   // qty armazenar quantidade de vezes combinadas
   const qty = []
