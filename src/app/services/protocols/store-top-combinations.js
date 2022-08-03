@@ -1,6 +1,7 @@
 import { topCombinationsStub } from "../../../../fixtures/db-fixtures.js"
 import { InvalidParamError } from "../../err/errors.js"
 
+
 export const maketopN = (n) => {
   const topN= {}
   for (let i = 1 ; i <= n; i++) {
@@ -8,7 +9,6 @@ export const maketopN = (n) => {
   }
   return { topN }
 }
-
 
 export const storeTopCombinations = async (maxPositions, topCombinations ) => {
   
@@ -27,50 +27,54 @@ export const storeTopCombinations = async (maxPositions, topCombinations ) => {
     }
   
     leftKey = Object.keys(topCombinations[i])[0]
+
     if (topCombinations.length <= 1 && topCombinations[i] !== undefined) {
       topN[k].push(topCombinations[i][leftKey])
-    }
-    
-    for ( ; j < topCombinations.length  ; j++) { 
-      leftKey = Object.keys(topCombinations[i])[0]
-      rightKey = Object.keys(topCombinations[j])[0]
-      
-  
-      // Caso-1
-      if ( leftKey === rightKey ) { 
-        if (j === arrSize) {
-          topN[k].push(topCombinations[i][leftKey])
-          topN[k].push(topCombinations[j][rightKey])
-  
-        } else {
-          topN[k].push(topCombinations[i][leftKey])
-          i++
-        }
-      }  
-      // Caso-2
-      if ( (leftKey !== rightKey)) {
-        if (j !== arrSize) {
-          topN[k].push(topCombinations[i][leftKey])
-          i++
-          k += 1
 
-        } else {
-          topN[k].push(topCombinations[i][leftKey])
-          k +=1
-          topN[k].push(topCombinations[j][rightKey]) 
-        }
-      } 
-    }
+    } else {
+      for ( ; j < topCombinations.length  ; j++) { 
+        leftKey = Object.keys(topCombinations[i])[0]
+        rightKey = Object.keys(topCombinations[j])[0]
+        
+    
+        // Caso-1
+        if ( leftKey === rightKey ) { 
+          if (j === arrSize) {
+            topN[k].push(topCombinations[i][leftKey])
+            topN[k].push(topCombinations[j][rightKey])
+    
+          } else {
+            topN[k].push(topCombinations[i][leftKey])
+            i++
+          }
+        }  
+
+        // Caso-2
+        if ( (leftKey !== rightKey)) {
+          if (j !== arrSize) {
+            topN[k].push(topCombinations[i][leftKey])
+            i++
+            k += 1
+
+          } else {
+            topN[k].push(topCombinations[i][leftKey])
+            k++
+            topN[k].push(topCombinations[j][rightKey]) 
+            
+          }
+        } 
+      };
+    };
       return { topN }
 }
 
-export const mapStoreTopCombinations = async (unmappedData) => {
+export const mapStoreTopCombinations = async (unmappedData, wishNumber) => {
     let obj = unmappedData
     const properties = Object.keys(obj)
     const { topN } = maketopN(properties)
     //const topN = {1: [], 2: [], 3: []}
-    
-    for (let i = 1; i <= properties.length ; i++ ) {
+    let size =  wishNumber || properties.length
+    for (let i = 1; i <= size ; i++ ) {
       topN[i] = []
       if(obj[i] !== undefined)
         obj[i].map((obj) => { 
@@ -82,7 +86,7 @@ export const mapStoreTopCombinations = async (unmappedData) => {
     return topN
 }
 
-export const getUniqueValues = ( arr ) => {
+export const getUniqueValues = async ( arr ) => {
   // qty armazenar quantidade de vezes combinadas
   const qty = []
 
