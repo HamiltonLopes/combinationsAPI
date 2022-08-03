@@ -12,8 +12,8 @@ import { topCombinationsStub } from '../../../fixtures/db-fixtures.js'
 export class ServicesCombinations {
 
   async getById ( productId ) {
-    const retrieve = []
-
+    const retrieve = {}
+    const res = []
     const db = new Db()
     const { combinations } = await db.getDocByFields()
     combinations
@@ -22,15 +22,20 @@ export class ServicesCombinations {
     } 
 
     const product = combinations[productId]
-    for (let i in product.combinations ) {
-      const [ key ] = Object.getOwnPropertyNames(product.combinations[i])
-      retrieve.push(key)
-    } 
+    
+        const retorno = Object.entries(product.combinations)
+        for (let i = 0; i < 3; i++ ) {
+
+        //console.log(retorno[i][1])
+        // retrieve['id'] = value
+        // retrieve['qty'] = key
+        res.push(retorno[i][1])
+      } 
 
     let message
     retrieve.length > 0 ? retrieve : message = { message: "There are no combinations for this product"}
-    console.log(retrieve)
-    return retrieve;
+    //console.log(retrieve)
+    return res;
   }
 
   async getStoreTopCombinantions (wishNumber) {
