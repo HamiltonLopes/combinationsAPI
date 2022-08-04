@@ -10,12 +10,12 @@ import * as HttpUtil from '../utils/request.js'
  export class Db {
   constructor ( request = new HttpUtil.Request()) {
     this.request = request
-    this.appKey = 'vtexappkey-travellog-ATKHOZ' 
-    this.appToken = 'IEBZJYKGDLJJFVKGXZMLGLVNJBWIQHOQZDFVQHHAQITNAXPPRFBITVJJAACBEKJFJDRVWOPUVXAJHBGWIDRKZICVIPQMTZGSTRPNALZGMPKKQAMCTCTJTMJMCMATAZVI'
-    this.accountName = 'travellog'
-    this.environment = 'myvtex'
-    this.entityName = 'TravellogHouse'
-    this.docId = "9a67657d-12c3-11ed-835d-120603e61087"//"aa4b2338-12bf-11ed-835d-125d56d9114d" //"bff42428-12bb-11ed-835d-124dabe2fa6f" //"50ba98f7-12bb-11ed-835d-12cb01f00d79"// 'b83f32d6-0f6c-11ed-835d-0e5c6c9bc771'//"24254e6a-11a3-11ed-835d-0217339c0b11" "bff42428-12bb-11ed-835d-124dabe2fa6f"  
+    this.appKey = process.env.X_VTEX_API_APP_KEY
+    this.appToken = process.env.X_VTEX_API_APP_TOKEN
+    this.accountName = process.env.ACCOUNT_NAME
+    this.environment = process.env.ENVIROMENT
+    this.entityName = process.env.DATA_ENTITY_NAME
+    this.docId = process.env.MASTERDATA_DOCUMENT_ID
 
   }
 
