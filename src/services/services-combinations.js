@@ -1,7 +1,6 @@
-import { Db } from '../clients/index.js'
-import { NotFoundError, InvalidTopRanking } from '../err/errors.js'
+import { Db } from '../infra/db.js'
+import { NotFoundError, InvalidTopRanking } from '../presentation/err/errors.js'
 import { storeTopCombinations, getUniqueValues, mapStoreTopCombinations } from './protocols/store-top-combinations.js'
-import { topCombinationsStub } from '../../../fixtures/db-fixtures.js'
 /*
   - Acessa o Db | MasterData
   - Verifica a existência do id
@@ -36,7 +35,6 @@ export class ServicesCombinations {
 
     let message
     retrieve.length > 0 ? retrieve : message = { message: "There are no combinations for this product" }
-    console.log(retrieve)
     return retrieve;
   }
 
