@@ -1,0 +1,21 @@
+.Wrapper{
+    width: 300px;
+}
+
+.active{
+    color: brown;
+}
+
+.image{
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.unavailable{
+    background-color: red;
+    color: aliceblue;
+}
+
+.productButtonAvailable{
+    color:purple !important;
+}

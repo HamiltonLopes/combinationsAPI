@@ -1,0 +1,16 @@
+.Container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.Wrapper{
+    max-width: 1528px;
+    margin: 0 auto;
+}
+
+.Title{
+    font-size: 20px;
+    color: #3f3f40;
+}
