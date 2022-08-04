@@ -78,7 +78,6 @@ export const storeTopCombinations = async (maxPositions, topCombinations ) => {
         } 
       };
     };
-      console.log(JSON.stringify(topN))
       return { topN }
 }
 
