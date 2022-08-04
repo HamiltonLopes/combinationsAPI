@@ -25,52 +25,70 @@ export const storeTopCombinations = async (maxPositions, topCombinations ) => {
     let j = 1;
   
     const arrSize = topCombinations.length -1
-    let rightKey
-    let leftKey 
+    let leftValue, rightValue;
+    let leftOutKey, rightOutKey;
+    let leftInKey, rightInKey;
   
     if (!Array.isArray(topCombinations) || topCombinations.length === 0 ) {
       throw new InvalidParamError('array topCombinations')
     }
   
-    leftKey = Object.keys(topCombinations[i])[0]
+    //leftKey = Object.keys(topCombinations[i])[0]
+  
 
     if (topCombinations.length <= 1 && topCombinations[i] !== undefined) {
-      topN[k].push(topCombinations[i][leftKey])
+       leftOutKey = Object.keys(topCombinations[i])[i]
+       leftInKey = Object.keys(topCombinations[i][leftOutKey])[i]
+      topN[k].push({[leftOutKey]: leftInKey})
 
     } else {
-      for ( ; j < topCombinations.length  ; j++) { 
-        leftKey = Object.keys(topCombinations[i])[0]
-        rightKey = Object.keys(topCombinations[j])[0]
+      for ( ; j < topCombinations.length  ; j++) {
         
-    
+        leftOutKey = Object.keys(topCombinations[i])[0]
+        rightOutKey = Object.keys(topCombinations[j])[0]
+        
+        leftValue = Object.values(topCombinations[i][leftOutKey])[0]
+        rightValue = Object.values(topCombinations[j][rightOutKey])[0]
+        
+        leftInKey = Object.keys(topCombinations[i][leftOutKey])[0]
+        rightInKey = Object.keys(topCombinations[j][rightOutKey])[0]
+
+
         // Caso-1
-        if ( leftKey === rightKey ) { 
+        if ( leftValue === rightValue ) { 
           if (j === arrSize) {
-            topN[k].push(topCombinations[i][leftKey])
-            topN[k].push(topCombinations[j][rightKey])
+            topN[k].push({[leftOutKey]: leftInKey})
+            topN[k].push({[rightOutKey]: rightInKey})
+            // topN[k].push(topCombinations[i][leftKey])
+            // topN[k].push(topCombinations[j][rightKey])
     
           } else {
-            topN[k].push(topCombinations[i][leftKey])
+            topN[k].push({[leftOutKey]: leftInKey})
+            //topN[k].push(topCombinations[i][leftKey])
             i++
           }
         }  
 
         // Caso-2
-        if ( (leftKey !== rightKey)) {
+        if ( (leftValue !== rightValue)) {
           if (j !== arrSize) {
-            topN[k].push(topCombinations[i][leftKey])
+            topN[k].push({[leftOutKey]: leftInKey})
+            //topN[k].push(topCombinations[i][leftKey])
             i++
             k += 1
 
           } else {
-            topN[k].push(topCombinations[i][leftKey])
+            topN[k].push({[leftOutKey]: leftInKey})
+            //topN[k].push(topCombinations[i][leftKey])
             k++
-            topN[k].push(topCombinations[j][rightKey]) 
+            topN[k].push({[rightOutKey]: rightInKey})
+            //topN[k].push(topCombinations[j][rightKey]) 
             
           }
         } 
       };
     };
+      console.log(JSON.stringify(topN))
       return { topN }
 }
 
@@ -88,8 +106,8 @@ export const mapStoreTopCombinations = async (unmappedData, wishNumber) => {
       if(obj[i] !== undefined)
         obj[i].map((obj) => { 
           const[[key, value]] = Object.entries(obj) 
-          let maped = { [key]: Number(key), [value]: Number(value) }
-          topN[i].push(maped)
+          let mapped = { [key]: Number(key), [value]: Number(value) }
+          topN[i].push(mapped)
         })
     }
     return topN
@@ -105,7 +123,8 @@ export const getUniqueValues = async ( arr ) => {
   // iterar para armazenar quantidade de vezes combinadas
   for ( let j = 0; j < arr.length; j++) {
     let keys = Object.keys(arr[j])[0]
-    qty.push(keys)
+    let values = Object.values(arr[j][keys])[0]
+    qty.push(values)
   }
 
   // agrupar quantidades de vezes combinadas
@@ -127,7 +146,7 @@ export const getUniqueValues = async ( arr ) => {
      topValues[`top${topValueKey}`] = value
      topValueKey++
   } 
-
+  console.log(topValues, maxPositions)
   // retornar o número de pódios
   // retornar o top values
   return {
