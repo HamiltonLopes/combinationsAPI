@@ -1,4 +1,4 @@
-import { MissingParamError } from "../err/errors"
+import { MissingParamError } from "../err/errors.js"
 import { ServicesCombinations } from "../../services/services-combinations.js"
 
 /*

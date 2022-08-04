@@ -1,5 +1,5 @@
-import { topCombinationsStub } from "../../../../fixtures/db-fixtures.js"
-import { InvalidParamError } from "../../err/errors.js"
+import { topCombinationsStub } from "../../../testes/fixtures/db-fixtures.js"
+import { InvalidParamError } from "../../presentation/err/errors.js"
 
 
 /*

@@ -35,7 +35,6 @@ export class ServicesCombinations {
 
     let message
     retrieve.length > 0 ? retrieve : message = { message: "There are no combinations for this product" }
-    console.log(retrieve)
     return retrieve;
   }
 
