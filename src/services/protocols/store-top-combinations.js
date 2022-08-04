@@ -1,7 +1,10 @@
-import { topCombinationsStub } from "../../../../fixtures/db-fixtures.js"
-import { InvalidParamError } from "../../err/errors.js"
+import { topCombinationsStub } from "../../../testes/fixtures/db-fixtures.js"
+import { InvalidParamError } from "../../presentation/err/errors.js"
 
 
+/*
+  TopN Object Factory
+*/
 export const maketopN = (n) => {
   const topN= {}
   for (let i = 1 ; i <= n; i++) {
@@ -10,6 +13,9 @@ export const maketopN = (n) => {
   return { topN }
 }
 
+/*
+  Logic to get Top Combinations of Store 
+*/
 export const storeTopCombinations = async (maxPositions, topCombinations ) => {
   
     const { topN } =  maketopN(maxPositions) 
@@ -19,48 +25,55 @@ export const storeTopCombinations = async (maxPositions, topCombinations ) => {
     let j = 1;
   
     const arrSize = topCombinations.length -1
-    let rightKey
-    let leftKey 
+    let leftValue, rightValue;
+    let leftOutKey, rightOutKey;
+    let leftInKey, rightInKey;
   
     if (!Array.isArray(topCombinations) || topCombinations.length === 0 ) {
       throw new InvalidParamError('array topCombinations')
     }
-  
-    leftKey = Object.keys(topCombinations[i])[0]
-
+    // Caso 1
     if (topCombinations.length <= 1 && topCombinations[i] !== undefined) {
-      topN[k].push(topCombinations[i][leftKey])
+       leftOutKey = Object.keys(topCombinations[i])[i]
+       leftInKey = Object.keys(topCombinations[i][leftOutKey])[i]
+      topN[k].push({[leftOutKey]: leftInKey})
 
-    } else {
-      for ( ; j < topCombinations.length  ; j++) { 
-        leftKey = Object.keys(topCombinations[i])[0]
-        rightKey = Object.keys(topCombinations[j])[0]
+    } else { // Caso 2
+      for ( ; j < topCombinations.length  ; j++) {
         
-    
-        // Caso-1
-        if ( leftKey === rightKey ) { 
+        leftOutKey = Object.keys(topCombinations[i])[0]
+        rightOutKey = Object.keys(topCombinations[j])[0]
+        
+        leftValue = Object.values(topCombinations[i][leftOutKey])[0]
+        rightValue = Object.values(topCombinations[j][rightOutKey])[0]
+        
+        leftInKey = Object.keys(topCombinations[i][leftOutKey])[0]
+        rightInKey = Object.keys(topCombinations[j][rightOutKey])[0]
+
+
+        // Caso-2.1
+        if ( leftValue === rightValue ) { 
           if (j === arrSize) {
-            topN[k].push(topCombinations[i][leftKey])
-            topN[k].push(topCombinations[j][rightKey])
+            topN[k].push({[leftOutKey]: leftInKey})
+            topN[k].push({[rightOutKey]: rightInKey})
     
           } else {
-            topN[k].push(topCombinations[i][leftKey])
+            topN[k].push({[leftOutKey]: leftInKey})
             i++
           }
         }  
 
-        // Caso-2
-        if ( (leftKey !== rightKey)) {
+        // Caso-2.2
+        if ( (leftValue !== rightValue)) {
           if (j !== arrSize) {
-            topN[k].push(topCombinations[i][leftKey])
+            topN[k].push({[leftOutKey]: leftInKey})
             i++
             k += 1
 
           } else {
-            topN[k].push(topCombinations[i][leftKey])
+            topN[k].push({[leftOutKey]: leftInKey})
             k++
-            topN[k].push(topCombinations[j][rightKey]) 
-            
+            topN[k].push({[rightOutKey]: rightInKey})            
           }
         } 
       };
@@ -68,6 +81,9 @@ export const storeTopCombinations = async (maxPositions, topCombinations ) => {
       return { topN }
 }
 
+/*
+  Logic to map the return of Store Top Combinations Method
+*/
 export const mapStoreTopCombinations = async (unmappedData, wishNumber) => {
     let obj = unmappedData
     const properties = Object.keys(obj)
@@ -79,13 +95,16 @@ export const mapStoreTopCombinations = async (unmappedData, wishNumber) => {
       if(obj[i] !== undefined)
         obj[i].map((obj) => { 
           const[[key, value]] = Object.entries(obj) 
-          let maped = { [key]: Number(key), [value]: Number(value) }
-          topN[i].push(maped)
+          let mapped = { [key]: Number(key), [value]: Number(value) }
+          topN[i].push(mapped)
         })
     }
     return topN
 }
 
+/*
+  Logic to remove duplicate key
+*/
 export const getUniqueValues = async ( arr ) => {
   // qty armazenar quantidade de vezes combinadas
   const qty = []
@@ -93,7 +112,8 @@ export const getUniqueValues = async ( arr ) => {
   // iterar para armazenar quantidade de vezes combinadas
   for ( let j = 0; j < arr.length; j++) {
     let keys = Object.keys(arr[j])[0]
-    qty.push(keys)
+    let values = Object.values(arr[j][keys])[0]
+    qty.push(values)
   }
 
   // agrupar quantidades de vezes combinadas
@@ -114,8 +134,8 @@ export const getUniqueValues = async ( arr ) => {
   for ( let value of qty ) {
      topValues[`top${topValueKey}`] = value
      topValueKey++
-  } 
-
+  }
+  
   // retornar o número de pódios
   // retornar o top values
   return {

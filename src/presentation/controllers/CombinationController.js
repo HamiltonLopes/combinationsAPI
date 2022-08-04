@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { GetOrder } from '../clients/client-get-order.js';
-import mergeSort from '../services/protocols/MergeSort.js';
+import mergeSort from '../../services/protocols/MergeSort.js';
 export default new class CombinationController {
 
     async store(req, res) {  //Método para receber hook config + Criar combinação de acordo com o pedido recebido

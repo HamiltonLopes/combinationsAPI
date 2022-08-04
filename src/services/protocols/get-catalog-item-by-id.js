@@ -1,5 +1,5 @@
 import { Catalog } from "../../clients/index.js"
-import { MissingParamError } from "../../err/errors.js"
+import { MissingParamError } from "../../presentation/err/errors.js"
 
 export const getCatalogItemById = async ( id = [] ) => {
   if (id.length <= 0) 

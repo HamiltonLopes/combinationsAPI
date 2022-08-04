@@ -1,8 +1,8 @@
- const produto = 'camisa'
- const pedidos = [
+export const produto = 'camisa'
+ export const pedidos = [
     { 
         items: [ 
-            'calça', 
+            'calca', 
             'camisa',
             'bone',
             "regata"
@@ -10,7 +10,7 @@
     },
     { 
       items: [ 
-          'calça', 
+          'calca', 
           'bone'
       ] 
   },
@@ -19,54 +19,48 @@
           'camisa',
           'bone',
           "chinelo",
-          'calça', 
+          'calca', 
         ] 
     },
     { 
         items: [ 
-            'calça', 
+            'calca', 
             'camisa',  
         ] 
     },
     { 
         items: [  
             'camisa',
-            'calça',
-            'sandália'
+            'calca',
+            'sandalia'
         ] 
     },
     { 
       items: [  
           'camisa',
-          'calça',
-          'cordão'
+          'calca',
+          'cordao'
       ] 
   },
   { 
     items: [  
         'camisa',
-        'calça',
-        'cordão'
+        'calca',
+        'cordao'
     ] 
 },
 { 
   items: [  
       'camisa',
-      'calça',
-      'cordão'
+      'calca',
+      'cordao'
   ] 
 },
 { 
   items: [  
-      'calça',
-      'cordão'
+      'calca',
+      'cordao'
   ] 
 },
 
 ]
-
-
-module.exports =  {
-  produto,
-  pedidos
-}

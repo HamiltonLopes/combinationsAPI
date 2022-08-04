@@ -1,4 +1,4 @@
-import {ServicesCombinations} from '../services/services-combinations.js'
+import {ServicesCombinations} from '../../services/services-combinations.js'
 
 export class ControllerTopCombinations {
   static async handle (req, res) {
