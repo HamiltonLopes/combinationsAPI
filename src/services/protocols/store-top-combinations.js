@@ -32,16 +32,13 @@ export const storeTopCombinations = async (maxPositions, topCombinations ) => {
     if (!Array.isArray(topCombinations) || topCombinations.length === 0 ) {
       throw new InvalidParamError('array topCombinations')
     }
-  
-    //leftKey = Object.keys(topCombinations[i])[0]
-  
-
+    // Caso 1
     if (topCombinations.length <= 1 && topCombinations[i] !== undefined) {
        leftOutKey = Object.keys(topCombinations[i])[i]
        leftInKey = Object.keys(topCombinations[i][leftOutKey])[i]
       topN[k].push({[leftOutKey]: leftInKey})
 
-    } else {
+    } else { // Caso 2
       for ( ; j < topCombinations.length  ; j++) {
         
         leftOutKey = Object.keys(topCombinations[i])[0]
@@ -54,36 +51,29 @@ export const storeTopCombinations = async (maxPositions, topCombinations ) => {
         rightInKey = Object.keys(topCombinations[j][rightOutKey])[0]
 
 
-        // Caso-1
+        // Caso-2.1
         if ( leftValue === rightValue ) { 
           if (j === arrSize) {
             topN[k].push({[leftOutKey]: leftInKey})
             topN[k].push({[rightOutKey]: rightInKey})
-            // topN[k].push(topCombinations[i][leftKey])
-            // topN[k].push(topCombinations[j][rightKey])
     
           } else {
             topN[k].push({[leftOutKey]: leftInKey})
-            //topN[k].push(topCombinations[i][leftKey])
             i++
           }
         }  
 
-        // Caso-2
+        // Caso-2.2
         if ( (leftValue !== rightValue)) {
           if (j !== arrSize) {
             topN[k].push({[leftOutKey]: leftInKey})
-            //topN[k].push(topCombinations[i][leftKey])
             i++
             k += 1
 
           } else {
             topN[k].push({[leftOutKey]: leftInKey})
-            //topN[k].push(topCombinations[i][leftKey])
             k++
-            topN[k].push({[rightOutKey]: rightInKey})
-            //topN[k].push(topCombinations[j][rightKey]) 
-            
+            topN[k].push({[rightOutKey]: rightInKey})            
           }
         } 
       };
@@ -145,8 +135,8 @@ export const getUniqueValues = async ( arr ) => {
   for ( let value of qty ) {
      topValues[`top${topValueKey}`] = value
      topValueKey++
-  } 
-  console.log(topValues, maxPositions)
+  }
+  
   // retornar o número de pódios
   // retornar o top values
   return {
