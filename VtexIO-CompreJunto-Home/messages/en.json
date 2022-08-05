@@ -1,0 +1,10 @@
+{
+  "admin/editor.buy-together.title": "Buy Together",
+  "store/shelf.buy-together.title": "Buy Together",
+  "admin/editor.title.label": "Title",
+  "admin/editor.secondary-title.label": "Secondary Title",
+  "store/shelf.buy-together.change.label": "Change",
+  "store/shelf.buy-together.remove.label": "Remove",
+  "store/shelf.buy-together.add.label": "Add",
+  "store/shelf.buy-together.total-products.label": "Buy 2 products for"
+}

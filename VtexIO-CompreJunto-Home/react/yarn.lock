@@ -1774,7 +1774,7 @@ aws4@^1.8.0:
 
 axios@^0.27.2:
   version "0.27.2"
-  resolved "https://registry.npmjs.org/axios/-/axios-0.27.2.tgz"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.27.2.tgz#207658cc8621606e586c85db4b41a750e756d972"
   integrity sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==
   dependencies:
     follow-redirects "^1.14.9"
@@ -4816,10 +4816,6 @@ tr46@^1.0.1:
   dependencies:
     punycode "^2.1.0"
 
-"travellog.compre-junto-component@https://renatotadeu--travellog.myvtex.com/_v/private/typings/linked/v1/travellog.compre-junto-component@0.0.1+build1659643925/public/@types/travellog.compre-junto-component":
-  version "0.0.1"
-  resolved "https://renatotadeu--travellog.myvtex.com/_v/private/typings/linked/v1/travellog.compre-junto-component@0.0.1+build1659643925/public/@types/travellog.compre-junto-component#2f7988dea4402713430b91af7f27f3188d79e967"
-
 ts-invariant@^0.4.0, ts-invariant@^0.4.4:
   version "0.4.4"
   resolved "https://registry.npmjs.org/ts-invariant/-/ts-invariant-0.4.4.tgz"
@@ -4989,7 +4985,8 @@ verror@1.10.0:
 
 "vtex.flex-layout@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.flex-layout@0.20.0/public/@types/vtex.flex-layout":
   version "0.20.0"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.flex-layout@0.20.0/public/@types/vtex.flex-layout#70a7b1b6dda96a6ae16b80e5c3e6b263e1f38631"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.flex-layout@0.20.0/public/@types/vtex.flex-layout"
+  integrity sha512-S3ESMgEf3YztS1vKNfj0ICWrcOimdcjD54j0grgFsOvwmiXsd4vpEro9RNdWbG6WdBbxSmw7ni+lFJ5wTFADsw==
 
 "vtex.format-currency@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.format-currency@0.4.1/public/@types/vtex.format-currency":
   version "0.4.1"

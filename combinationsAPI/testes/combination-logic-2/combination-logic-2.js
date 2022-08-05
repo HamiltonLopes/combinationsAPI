@@ -1,10 +1,12 @@
-const { produto, pedidos } = require('./test-fixture-data')
+import { produto, pedidos } from'./test-fixture-data.js'
 
 function combinações (produto, pedidos) {
+  
   /*
     obj: abrigar o item e o numero de vezes que ele aparece com um dado produto
   */
-  let obj = {}
+  let obj1 = {}
+  let obj2 = {}
 
   /*
     pedidoDireita | pedidoEsquerda: Abrigar items de pedidos que vem da esquerda e da direita do array
@@ -39,7 +41,7 @@ function combinações (produto, pedidos) {
       pedidoEsquerda.map(item => {             // Percorre o array de items  
         //console.log(item)                    // Caso o item não seja o produto a ser combinado    
         if(item !== produto)                   // Adiciona o item como propriedade com um valor numério ao obj 
-          obj[item] = (obj[item] || 0) +1      // Verifica se a propriedade existe no obj, se sim incremeta, se não permanece com o valor
+          obj1[item] = (obj1[item] || 0) +1      // Verifica se a propriedade existe no obj, se sim incremeta, se não permanece com o valor
 
       });
       
@@ -62,41 +64,48 @@ function combinações (produto, pedidos) {
     } else {
       pedidoDireita.map(item => { 
         if(item !== produto)
-          obj[item] = (obj[item] || 0) +1
+          obj1[item] = (obj1[item] || 0) +1
         });
 
       right += 1;
     }
 
   }
+
+  Object.entries(obj1).forEach(([key, value]) => {
+    if(obj2[value]){
+    obj2[value] = [...obj2[value], String(key)]
+    }else{
+    obj2[value] = [String(key)]
+    }
+ });
    
 //console.log("Objeto: " + JSON.stringify({itemDeCombinação: produto, ...obj, totalPedidos: pedidos.length , pedidosSemProduto: pedidosSemProduto})) 
 
-  const compositeData = { 
-    itemDeCombinação: produto, 
-    totalPedidos: pedidos.length , 
-    pedidosSemProduto: pedidosSemProduto,
-    ...obj, 
-  }
-
-  return  compositeData;
+  const factoryModelData = ( obj1, obj2, product ) =>({
+   products: { [`${product}Combinations`] : {
+        byItem: obj1,
+        byQty: obj2
+      }
+    }
+  })
+  return  factoryModelData(obj1, obj2, produto);
 }
 
 
-combinações(produto, pedidos)
+const data = combinações(produto, pedidos)
+console.log(JSON.stringify(data))
 
 /*
 
-  RETORNO {
-    itemDeCombinação: "camisa",
-    calça: 7,
-    bone: 2,
-    regata: 1,
-    chinelo: 1,
-    sandália: 1,
-    cordão: 7,
-    totalPedidos: 9,
-    pedidosSemProduto: 2
+  RETORNO
+  {
+    "products":{
+      "camisaCombinations":{
+        "byItem":{"calca":7,"bone":2,"regata":1,"chinelo":1,"sandalia":1,"cordao":3},
+        "byQty":{"1":["regata","chinelo","sandalia"],"2":["bone"],"3":["cordao"],"7":["calca"]}
+      }
+    }
   }
 
 */
