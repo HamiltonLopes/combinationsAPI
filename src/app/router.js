@@ -1,9 +1,10 @@
 import { Router } from 'express';
-import dotenv from 'dotenv';
 import CombinationController from '../presentation/controllers/CombinationController.js'
 import { ControllerCombinationsById } from '../presentation/controllers/controller-combinations-by-id.js'
 import { ControllerTopCombinations } from '../presentation/controllers/controller-top-combinations.js'
- dotenv.config();
+// import dotenv from 'dotenv';
+// dotenv.config();
+
 
 const Routes = new Router();
 
