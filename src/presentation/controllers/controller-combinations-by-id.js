@@ -10,7 +10,7 @@ export class ControllerCombinationsById {
     try {
       const combinations = new ServicesCombinations()
 
-      const { productId } = request.body 
+      const { productId } = request.params 
       const productsCombinations = await combinations.getById(productId)
       return response.status(200).json(productsCombinations)
   
