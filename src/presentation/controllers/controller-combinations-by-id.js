@@ -15,17 +15,8 @@ export class ControllerCombinationsById {
     try {
       const combinations = new ServicesCombinations()
 
-      //const fields = ['ProductId']
-
-      // for (let field of fields ) { 
-      //   if( ! ) 
-      //     return response.status(400).json(badRequest(new MissingParamError()))
-        
-      // }  
       const { productId } = request.params
-  
-      const { ProductId } = request.body
-            
+              
       const productsCombinations = await combinations.getById(productId)
       return response.status(200).json(productsCombinations)
   
