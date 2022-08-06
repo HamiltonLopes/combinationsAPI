@@ -63,12 +63,12 @@ export class ServicesCombinations {
       ACCESS CLIENT ORDER ID 
     */    
       const getOrder = new GetOrder()
-      const {data :{items}} = await getOrder.byId(OrderId);
+      const { items } = await getOrder.byId(OrderId);
     /*
       ACCESS CLIENT MASTERDATA [GET]
     */
       const  db = new Db()
-      let { data : {combinations, topCombinations} } = await db.getDocByFields();
+      let { combinations, topCombinations } = await db.getDocByFields();
     /*
       ITEMS HANDLE FROM GET ORDER
     */
