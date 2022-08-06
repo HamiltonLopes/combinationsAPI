@@ -11,7 +11,7 @@ const Routes = new Router();
 Routes.get('/', (req, res) => res.send('Combinations-API - Endpoint padrão!'));
 
 Routes.post('/orderProcessor', CombinationController.store);
-Routes.get('/combinations-by-id/:productId', ControllerCombinationsById.handle)
+Routes.get('/combinations-by-id', ControllerCombinationsById.handle)
 Routes.get('/store-top-combinations', ControllerTopCombinations.handle)
 
 export default Routes;

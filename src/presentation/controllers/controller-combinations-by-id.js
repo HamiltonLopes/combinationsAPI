@@ -2,11 +2,6 @@ import { MissingParamError } from "../err/errors.js"
 import { ServicesCombinations } from "../../services/services-combinations.js"
 import { badRequest, serverError } from "../helpers/helpers-http.js"
 
-/*
-  - Valida o parametro do request
-  - Chamma o CombinationsServices
-  - Retornar para o front o que eles precisarem
-*/
 
 export class ControllerCombinationsById {
 
