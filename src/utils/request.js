@@ -20,6 +20,10 @@ export class Request {
     return this.request.delete(url, config);
   }
 
+  patch ( url, data, config ) {
+    return this.request.patch(url, data, config);
+  }
+
   isRequestError ( error ) {
     let requesError;
     error instanceof AxiosError ? requesError = 1 : requesError = 0 
