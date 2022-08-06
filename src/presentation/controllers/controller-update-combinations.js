@@ -1,5 +1,6 @@
-import { status } from 'express/lib/response';
 import { ServicesCombinations } from '../../services/services-combinations.js'
+import { serverError } from '../helpers/helpers-http.js';
+
 
 export class ControllerUpdateCombinations {
 
@@ -19,7 +20,7 @@ export class ControllerUpdateCombinations {
 
     } catch ( error ) {
       console.log(error)
-      res.status(status).json(error)
+      res.status(500).json(serverError(error))
     }
   }
 }
