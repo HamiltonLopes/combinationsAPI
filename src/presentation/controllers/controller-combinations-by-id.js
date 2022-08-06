@@ -1,5 +1,6 @@
 import { MissingParamError } from "../err/errors.js"
 import { ServicesCombinations } from "../../services/services-combinations.js"
+import { badRequest, serverError } from "../helpers/helpers-http.js"
 
 /*
   - Valida o parametro do request
@@ -14,22 +15,23 @@ export class ControllerCombinationsById {
     try {
       const combinations = new ServicesCombinations()
 
-      const fields = ['ProductId']
+      //const fields = ['ProductId']
 
-      for (let field of fields ) { 
-        if( !request.body[field] ) 
-          return response.status(400).json(new MissingParamError())
+      // for (let field of fields ) { 
+      //   if( ! ) 
+      //     return response.status(400).json(badRequest(new MissingParamError()))
         
-      }  
+      // }  
+      const { productId } = request.params
   
       const { ProductId } = request.body
             
-      const productsCombinations = await combinations.getById(ProductId)
+      const productsCombinations = await combinations.getById(productId)
       return response.status(200).json(productsCombinations)
   
     } catch (error) {
       console.log(error)
-      response.status(500).send( { message: error.message })
+      response.status(500).json(serverError(error))
     }
 
   }
