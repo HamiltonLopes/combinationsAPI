@@ -1,4 +1,5 @@
 import {ServicesCombinations} from '../../services/services-combinations.js'
+import { serverError } from '../helpers/helpers-http.js'
 
 export class ControllerTopCombinations {
   static async handle (req, res) {
@@ -10,7 +11,7 @@ export class ControllerTopCombinations {
 
     } catch (error) {
       console.log(error)
-      res.status(500).json(error)
+      res.status(500).json(serverError(error))
     }
   }
 }
