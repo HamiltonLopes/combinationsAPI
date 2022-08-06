@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import CombinationController from '../presentation/controllers/CombinationController.js'
+import CombinationController from '../presentation/controllers/controller-update-combinations.js'
 import { ControllerCombinationsById } from '../presentation/controllers/controller-combinations-by-id.js'
 import { ControllerTopCombinations } from '../presentation/controllers/controller-top-combinations.js'
 // import dotenv from 'dotenv';
