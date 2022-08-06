@@ -18,7 +18,8 @@ export class ServicesCombinations {
     const { combinations } = await db.getDocByFields()
 
     if (!combinations[productId]) {
-      throw new NotFoundError()
+      return []
+      //throw new NotFoundError()
     }
 
     const product = combinations[productId]
