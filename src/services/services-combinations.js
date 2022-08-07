@@ -83,6 +83,13 @@ export class ServicesCombinations {
     
     return status;
     }
+
+    async getRawStoreTopCombinantions () {
+      const db = new Db()
+      const {topCombinations} = await db.getDocByFields()
+  
+      return topCombinations
+  }
 }
 
 
