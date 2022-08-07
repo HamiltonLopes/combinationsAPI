@@ -10,7 +10,7 @@ const Routes = new Router();
 
 Routes.get('/', (req, res) => res.send('Combinations-API - Endpoint padrão!'));
 
-Routes.post('/orderProcessor', ControllerUpdateCombinations.handle);
+Routes.post('/order-processor', ControllerUpdateCombinations.handle);
 Routes.get('/combinations-by-id/:productId', ControllerCombinationsById.handle)
 Routes.get('/store-top-combinations', ControllerTopCombinations.handle)
 
