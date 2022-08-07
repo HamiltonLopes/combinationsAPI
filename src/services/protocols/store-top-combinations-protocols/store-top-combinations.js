@@ -1,5 +1,5 @@
-import { topCombinationsStub } from "../../../testes/fixtures/db-fixtures.js"
-import { InvalidParamError } from "../../presentation/err/errors.js"
+import { topCombinationsStub } from "../../../../testes/fixtures/db-fixtures.js"
+import { InvalidParamError } from "../../../presentation/err/errors.js"
 
 
 /*
@@ -81,68 +81,9 @@ export const storeTopCombinations = async (maxPositions, topCombinations ) => {
       return { topN }
 }
 
-/*
-  Logic to map the return of Store Top Combinations Method
-*/
-export const mapStoreTopCombinations = async (unmappedData, wishNumber) => {
-    let obj = unmappedData
-    const properties = Object.keys(obj)
-    const { topN } = maketopN(properties)
-    //const topN = {1: [], 2: [], 3: []}
-    let size =  wishNumber || properties.length
-    for (let i = 1; i <= size ; i++ ) {
-      topN[i] = []
-      if(obj[i] !== undefined)
-        obj[i].map((obj) => { 
-          const[[key, value]] = Object.entries(obj) 
-          let mapped = { [key]: Number(key), [value]: Number(value) }
-          topN[i].push(mapped)
-        })
-    }
-    return topN
-}
 
-/*
-  Logic to remove duplicate key
-*/
-export const getUniqueValues = async ( arr ) => {
-  // qty armazenar quantidade de vezes combinadas
-  const qty = []
 
-  // iterar para armazenar quantidade de vezes combinadas
-  for ( let j = 0; j < arr.length; j++) {
-    let keys = Object.keys(arr[j])[0]
-    let values = Object.values(arr[j][keys])[0]
-    qty.push(values)
-  }
 
-  // agrupar quantidades de vezes combinadas
-  let index = 0
-  for ( let i = 1; i < qty.length;  i++ ) {
-    if ( qty[index] !== qty[i]) 
-    index++
-      qty[index] = qty[i]
-    }
-  
-  // remover valores duplicados
-  const maxPositions = index+1    
-  qty.splice(maxPositions)
-
-  // armazenar valores de vezes combinadas em chaves
-  const topValues = {}
-  let topValueKey = 1
-  for ( let value of qty ) {
-     topValues[`top${topValueKey}`] = value
-     topValueKey++
-  }
-  
-  // retornar o número de pódios
-  // retornar o top values
-  return {
-    topValues,
-    maxPositions
-  }
-}
 
 /*
       i

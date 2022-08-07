@@ -2,7 +2,7 @@ import { Db } from '../infra/db.js'
 import { GetOrder } from '../clients/index.js'
 import { NotFoundError, InvalidTopRanking } from '../presentation/err/errors.js'
 import { orderProcessorItems } from './protocols/order-processor-protocols/order-processor-items.js'
-import { storeTopCombinations, getUniqueValues, mapStoreTopCombinations } from './protocols/store-top-combinations.js'
+import { storeTopCombinations, getUniqueValues, mapStoreTopCombinations } from './protocols/store-top-combinations-protocols/index.js'
 /*
   - Acessa o Db | MasterData
   - Verifica a existência do id
