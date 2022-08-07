@@ -1,3 +1,33 @@
+import { ServicesCombinations } from '../../services/services-combinations.js'
+import { serverError } from '../helpers/helpers-http.js';
+
+
+export class ControllerUpdateCombinations {
+
+  static  async handle (req, res) {  //Método para receber hook config + Criar combinação de acordo com o pedido recebido
+    try {
+      const { OrderId, State, hookConfig } = req.body;
+      if (hookConfig) //se possuir a variavel configuração, significa que o request foi somente de configuração
+          return res.status(200).json({ "Config": "Successful" }); //retorna um status 200 para informar que a configuração foi bem sucedida
+
+      if (!State) //verifica se a váriavel estado foi passada no body da requisição
+          return res.status(400).json({ "error": "Bad Request" }); //envia um erro informando requisição inválida
+
+      const servicesCombinations = new ServicesCombinations()
+      const  status = await servicesCombinations.updateCombinations(OrderId)
+
+      res.status(status).json({ "Response": "Ok - User's Orders Updated" });
+
+    } catch ( error ) {
+      console.log(error)
+      res.status(500).json(serverError(error))
+    }
+  }
+}
+
+
+/*
+
 import axios from 'axios';
 import mergeSort from '../../services/protocols/MergeSort.js';
 export default new class CombinationController {
@@ -95,3 +125,5 @@ export default new class CombinationController {
         res.status(responseUpdate.status).json({ "Response": "Ok - User's Orders Updated" });
     }
 }
+
+*/

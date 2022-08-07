@@ -1,5 +1,7 @@
 import { Db } from '../infra/db.js'
+import { GetOrder } from '../clients/index.js'
 import { NotFoundError, InvalidTopRanking } from '../presentation/err/errors.js'
+import { orderProcessorItems } from './protocols/order-processor-protocols/order-processor-items.js'
 import { storeTopCombinations, getUniqueValues, mapStoreTopCombinations } from './protocols/store-top-combinations.js'
 /*
   - Acessa o Db | MasterData
@@ -54,6 +56,33 @@ export class ServicesCombinations {
   
       return { topStore }
   }
+
+  async updateCombinations (OrderId) {
+
+    /*
+      ACCESS CLIENT ORDER ID 
+    */    
+      const getOrder = new GetOrder()
+      const { items } = await getOrder.byId(OrderId);
+    /*
+      ACCESS CLIENT MASTERDATA [GET]
+    */
+      const  db = new Db()
+      let { combinations, topCombinations } = await db.getDocByFields();
+    /*
+      ITEMS HANDLE FROM GET ORDER
+    */
+      await orderProcessorItems( items, combinations, topCombinations );  
+    /*
+      ACCESS CLIENT MASTERDATA [PATCH]
+    */
+      const status = await db.updateByDocId(combinations, topCombinations)
+  
+      if (status !== 204 )
+        throw new Error(`Somethings wrong to update data, status: ${status}`)
+    
+    return status;
+    }
 }
 
 
