@@ -17,7 +17,7 @@ export  class GetOrder {
 
   }
 
-  async fetchGetById ( orderId ) {
+  async byId ( orderId ) {
     try{
       const response = await this.request.get (
         `https://${this.accountName}.${this.environment}.com/api/oms/pvt/orders/${ orderId }`,
