@@ -1,5 +1,17 @@
 ### **<h1 align="center">CombinationsAPI</h1>**
 
+## Team 
+  * [Jean Fraga](https://www.linkedin.com/in/jean-fraga/)
+  * [Hamilton Lopes](https://www.linkedin.com/in/hamilton-lopes/)
+  * [Gustavo Sobreiro](https://www.linkedin.com/in/gustavo-sobreiro-de-assis/)
+  * [Hamiceis Pereira](https://www.linkedin.com/in/hamiceis-pereira/)
+  * [Beatriz Cunha Guimarães](https://www.linkedin.com/in/mbeatrizcg/)
+  * [Derek Santos](https://www.linkedin.com/in/derekcsantos/)
+  * [Marco Antonio](https://www.linkedin.com/in/marco-antonio-pereira-esteves-005185113/)
+  * [Renato Tadeu](https://www.linkedin.com/in/renato-tadeu)
+  * [Henrique Scherer](https://www.linkedin.com/in/henrique-scherer/)
+  * [Gustavo Rogerio](https://www.linkedin.com/in/fabio-rogerio-234b65223/)
+
 
 ## 💻 Sobre a API
 
@@ -23,38 +35,41 @@ A API tbm retorna a propriedade `qty: {}` que contém o número de vezes que as 
 
 ### **Example**
 
-As combinações no top 1 aconteceram 39 vezes, no top2 as combinações aconteceram 12 vezes. Esses números servem pro relatório para ajudar o lojista 
-na tomada de decisões para classificar os produtos com  alta performance que geram lucro com pouco investimento; produtos de alta performance que geram lucro com 
-muito investimento; produtos que  tem grande investimento e geram pouca receita - geralmente são os lançamentos; e  
-os produtos de baixa performance que devem ser analisados para serem promovidos ou  realocados.
+As combinações no top 1 aconteceram 39 vezes, no top2 as combinações aconteceram 12 vezes. Esses números servem para ajudar o lojista 
+na tomada de decisões ao classificar os produtos com  alta performance que geram lucro com pouco investimento; produtos de alta performance que geram lucro com 
+muito investimento; produtos que  tem grande investimento e geram pouca receita - geralmente são os lançamentos; e os produtos de baixa performance que devem ser analisados para serem promovidos ou  realocados.
+<img src="https://raw.githubusercontent.com/HamiltonLopes/combinationsAPI/master/assets/store-top-explain.png"  width="1000" height="600"  />
+
+##  Rotas 
+
+### Base-URL: https://hccombinationsapi.tk/combinations-api/v1
+
+### Route | order-processor
+![order-processor](http://g.recordit.co/wFzktrh9Bq.gif)
 
 
+### Route | combinations-by-id/:productId
+![combinations-by-id/:productId](http://g.recordit.co/p3iJnHwXuc.gif)
 
-## Estrutura de dados
 
-*colocar fotos dos diagramas das estuturas de dados que o jean fez*
+### Route | store-top-combinations
+![store-top-combinations](http://g.recordit.co/IDzEuRDv6R.gif)
 
-## Architecture Project 
+### Route | raw-top-combinations
+![raw-top-combinations](http://g.recordit.co/jPlSlA1e3p.gif)
+
+
+## Arquitetura
 <img src="https://github.com/JeanFragaJS/combinationsAPI-1/blob/master/assets/architecture-vtex-final-challenge.png?raw=true"  width="540" height="506"  />
 
+## Estrutura de dados
+![db-schema](https://github.com/HamiltonLopes/combinationsAPI/blob/master/assets/db-schema.png?raw=true)
+
 ## Documentação
-Foi feita uma documentação completa no swagger:
+**Documentação completa no swagger:** [Link](https://hccombinationsapi.tk/combinations-api/v1/docs)
 
-![swagger](https://user-images.githubusercontent.com/9729963/183329121-24ea7927-cd0e-4ace-9092-09adc00ad4fa.jpg)
-
-*colocar mais fotos sobre a documentação no swagger*
-*atualizar aws com o endpoint de /docs e informar aqui o endpoint gerado para consumo da doc*
+![swagger](http://g.recordit.co/TtFeNeuGVy.gif)
 
 
 
-## Team 
-  * [Jean Fraga](https://www.linkedin.com/in/jean-fraga/)
-  * [Hamilton Lopes](https://www.linkedin.com/in/hamilton-lopes/)
-  * [Gustavo Sobreiro](https://www.linkedin.com/in/gustavo-sobreiro-de-assis/)
-  * [Hamiceis Pereira](https://www.linkedin.com/in/hamiceis-pereira/)
-  * [Beatriz Cunha Guimarães](https://www.linkedin.com/in/mbeatrizcg/)
-  * [Derek Santos](https://www.linkedin.com/in/derekcsantos/)
-  * [Marco Antonio](https://www.linkedin.com/in/marco-antonio-pereira-esteves-005185113/)
-  * [Renato Tadeu](https://www.linkedin.com/in/renato-tadeu)
-  * [Henrique Scherer](https://www.linkedin.com/in/henrique-scherer/)
-  * [Gustavo Rogerio](https://www.linkedin.com/in/fabio-rogerio-234b65223/)
+
