@@ -16,7 +16,20 @@ novo registro das que ocorreram pela primeira vez. Neste mesmo momento é recalc
 inseridas nesta requisição entraram para as melhores combinações da loja. Após todo o funcionamento são armazenadas as estruturas de dados no banco
 de dados NoSQL da Vtex, o MasterData.
 
-**explicar funcionamento das outras lógicas/endpoints da api**
+Para retornar as melhores combinações da loja por meio da rota `/store-top-combinations` 
+a API implementa algoritmos de padrões de contagem para eliminar valores duplicados e 
+elencar chaves numéricamente ordenadas com um array de objetos das combinações na propriedade `topStore`. 
+A API tbm retorna a propriedade `qty: {}` que contém o número de vezes que as combinações foram feitas em cada top.
+
+### **Example**
+
+As combinações no top 1 aconteceram 39 vezes, no top2 as combinações aconteceram 12 vezes. Esses números servem pro relatório para ajudar o lojista 
+na tomada de decisões para classificar os produtos com  alta performance que geram lucro com pouco investimento; produtos de alta performance que geram lucro com 
+muito investimento; produtos que  tem grande investimento e geram pouca receita - geralmente são os lançamentos; e  
+os produtos de baixa performance que devem ser analisados para serem promovidos ou  realocados.
+
+
+
 ## Estrutura de dados
 
 *colocar fotos dos diagramas das estuturas de dados que o jean fez*
