@@ -89,24 +89,21 @@
         }
       }
     },
-    "/combinations-by-id/:productId": {
+    "/combinations-by-id/{productId}": {
       "get": {
         "description": "Get Combinations by Id",
         "operationId": "CombinationsById",
-        "parameters": [
-          {
-            "ProductId": {
-              "name": "ProductId",
+        "parameters": [{
+              "name": "productId",
               "in": "path",
               "description": "number id of product",
               "required": true,
               "schema": {
-                "type": "integer",
-                "example": 55
-              }  
-            }
-          } 
-        ],
+                "type": "string",
+                "example": "55"
+              }
+          } ]
+        ,
         "responses": {
           "200": {
             "description": "Get Combinations By Id",
@@ -213,6 +210,57 @@
           }
         }
       }
+    },
+    "/raw-top-combinations": {
+      "get": {
+        "description": "Get Raw Top Combinations of Store",
+        "operationId": "Get Raw TopCombinationsOfStore",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "TopCombinations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RawTopStore"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Invalid parameters",
+                  "code": "400",
+                  "error": 
+                    "Bad Request"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Server Error",
+                  "code": "500",
+                  "error": 
+                    "Server Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -240,12 +288,6 @@
           "7": 7
         }
       },
-      "number": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/TopCombinations"
-        }
-      },
       "CombinationsById": {
         "type": "array",
         "example": [35, 20, 93]
@@ -269,29 +311,36 @@
         "type": "object",
         "properties": {
           "1": {
-            "$ref": "#/components/schemas/1"
-          },
-          "2": {
-            "$ref": "#/components/schemas/2"
-          },
-          "3": {
-            "$ref": "#/components/schemas/3"
+            "type": "array",
+            "items": {
+              "type": "object",
+              "example":  
+                {
+                  "2": 2,
+                  "8": 8
+                }
+            }
           },
           "qty": {
             "type": "object",
-            "top1": {
-              "type": "number",
-              "example": 10
-            },
-            "top2": {
-              "type": "number",
-              "example": 9 
-            },
-            "top3": {
-              "type": "number",
-              "example": 8 
-            }
+            "properties": {
+              "top1": {
+                "type": "number",
+                "example": 10
+              }
+            } 
           }
+        }
+      },
+      "RawTopStore": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "example": {
+            "4": {
+              "7": 39
+            }
+          } 
         }
       },
       "Error": {
