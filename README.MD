@@ -5,15 +5,15 @@
 
 API desenvolvida para uso no desafio final no HiringCoders#3 Gama Academy VTEX.
 
-Essa API utiliza de duas estruturas de dados complexas para armazenamento de combinações de produtos
-de vendas, onde em uma delas se encontra as melhores combinações de venda de produtos de toda a loja e
+Essa API utiliza duas estruturas de dados complexas para armazenamento de combinações de produtos
+de vendas, onde em uma delas se encontram as melhores combinações de venda de produtos de toda a loja e
 a outra as melhores combinações de venda por produto, feitas para alimentar alguns componentes em VtexIO.
 
 Básicamente a API espera um request do [OrderHook](https://developers.vtex.com/vtex-rest-api/reference/gethookconfiguration) da vtex e a partir
 do Id do pedido que é enviado, ela mapeia todas as combinações de itens geradas naquele pedido (se o pedido tiver mais de um item comprado), e 
-utiliza de sua lógica para armazenar nas estruturas de dados as combinações. Somando uma naquelas que já aconteceram anteriormente ou criando um
+utiliza a sua lógica para armazenar nas estruturas de dados as combinações. Somando uma naquelas que já aconteceram anteriormente ou criando um
 novo registro das que ocorreram pela primeira vez. Neste mesmo momento é recalculado todas as combinações para saber se alguma das combinações
-inseridas nesta requisição entraram para as melhores combinações da loja. Após todo o funcionamento é armazenado as estruturas de dados no banco
+inseridas nesta requisição entraram para as melhores combinações da loja. Após todo o funcionamento são armazenadas as estruturas de dados no banco
 de dados NoSQL da Vtex, o MasterData.
 
 **explicar funcionamento das outras lógicas/endpoints da api**
