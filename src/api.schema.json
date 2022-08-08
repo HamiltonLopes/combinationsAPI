@@ -2,8 +2,8 @@
   "openapi": "3.0.3",
   "info": {
     "version": "1.0.0",
-    "title": "Api Points - challenge vtexIo",
-    "description": "Debit Points API",
+    "title": "Travellog-API's",
+    "description": "Travellog-API's",
     "termsOfService": "http://api_url/terms/",
     "license": {
       "name": "Apache 2.0",
@@ -21,7 +21,7 @@
     }
   ],
   "paths": {
-    "/orderProcessor": {
+    "/order-processor": {
       "post": {
         "description": "Process Orders",
         "operationId": "ProcessOrders",
@@ -30,12 +30,13 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ReqBody"
+                "$ref": "#/components/schemas/OrderData"
               }
             }
           },
           "required": true
         },
+
         "responses": {
           "200": {
             "description": "Enabled Hook Config",
@@ -47,13 +48,77 @@
               }
             }
           },
-          "201": {
-            "description": "Set Points",
+          "204": {
+            "description": "Update Combinations",
+            "content": {}
+          },
+          "400": {
+            "description": "Invalid parameters, User not found, Order not found, Order already in use",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Points"
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Invalid parameters",
+                  "code": "400",
+                  "error": 
+                    "Bad Request"
                 }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Server Error",
+                  "code": "500",
+                  "error": 
+                    "Server Error"
+                }
+              }
+            }
+          }
+
+          
+        }
+      }
+    },
+    "/combinations-by-id/:productId": {
+      "get": {
+        "description": "Get Combinations by Id",
+        "operationId": "CombinationsById",
+        "parameters": [
+          {
+            "ProductId": {
+              "name": "ProductId",
+              "in": "path",
+              "description": "number id of product",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "example": 55
+              }  
+            }
+          } 
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Combinations By Id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "20"
+                  }
+                }  
               }
             }
           },
@@ -73,17 +138,18 @@
               }
             }
           },
-          "404": {
-            "description": "User Not Found",
+          "500": {
+            "description": "Server Error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 },
                 "example": {
-                  "message": ["User not Found"],
-                  "code": "404",
-                  "error": ["User Not Found"]
+                  "message": "Server Error",
+                  "code": "500",
+                  "error": 
+                    "Server Error"
                 }
               }
             }
@@ -93,34 +159,28 @@
         }
       }
     },
-    "/points/clientId": {
+    "/store-top-combinations": {
       "get": {
-        "description": "Get Points",
-        "operationId": "Get Points",
+        "description": "Get Top Combinations of Store",
+        "operationId": "GetTopCombinationsOfStore",
         "parameters": [
           {
-            "name": "clientId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "exemple": "3f2cbbd5-cfdf-4bc2-a26b-b6dc1cd23ea9"
-            }
+            "top": 3
           }
         ],
         "responses": {
           "200": {
-            "description": "The user rewards points",
+            "description": "TopCombinations",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetPoints"
+                  "$ref": "#/components/schemas/TopStore"
                 }
               }
             }
           },
           "400": {
-            "description": "Not Found",
+            "description": "Invalid parameters",
             "content": {
               "application/json": {
                 "schema": {
@@ -134,6 +194,22 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Server Error",
+                  "code": "500",
+                  "error": 
+                    "Server Error"
+                }
+              }
+            }
           }
         }
       }
@@ -141,65 +217,82 @@
   },
   "components": {
     "schemas": {
-      "debitValue": {
+      "State": {
         "type": "string",
-        "example": "-7000"
+        "example": ["order-completed", "handling", "ready-for-handling", "waiting-ffmt-authorization", "cancel"]
       },
-      "debitOrder": {
-        "type": "string",
-        "example": "2022-07-17-4"
-      },
-      "clientId": {
-        "type": "string",
-        "example": "0f2ad6e9-35bc-489e-97cd-4b61991e5543"
-      },
-      "hookConfig": {
+      "HookConfig": {
         "type": "string",
         "example": "ping"
       },
-      "ReqBody": {
+      "OrderId": {
+        "type": "string",
+        "example": "1247000612275-01"
+      },
+      "top": {
+        "type": "number",
+        "example": 2
+      },
+      "TopCombinations": {
         "type": "object",
-        "properties": {
-          "debitValue": {
-            "$ref": "#/components/schemas/debitValue"
-          },
-          "debitOrder": {
-            "$ref": "#/components/schemas/debitOrder"
-          },
-          "clientId": {
-            "$ref": "#/components/schemas/clientId"
-          },
-          "hookConfig": {
-            "$ref": "#/components/schemas/hookConfig"
-          }
+        "example": {
+          "4": 4,
+          "7": 7
         }
       },
-      "Points": {
+      "number": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/TopCombinations"
+        }
+      },
+      "CombinationsById": {
+        "type": "array",
+        "example": [35, 20, 93]
+      },
+      "OrderData": {
         "type": "object",
         "properties": {
-          "Points": {
-            "type": "number",
-            "example": 9000
+          "State": {
+            "$ref": "#/components/schemas/State"
+          },
+          "OrderId": {
+            "$ref": "#/components/schemas/OrderId"
+          },
+          "HookConfig": {
+            "$ref": "#/components/schemas/HookConfig",
+            "required": false
           }
         }  
       },
-      "GetPoints": {
+      "TopStore": {
         "type": "object",
         "properties": {
-          "Points": {
-            "type": "number",
-            "example": 9000
+          "1": {
+            "$ref": "#/components/schemas/1"
+          },
+          "2": {
+            "$ref": "#/components/schemas/2"
+          },
+          "3": {
+            "$ref": "#/components/schemas/3"
+          },
+          "qty": {
+            "type": "object",
+            "top1": {
+              "type": "number",
+              "example": 10
+            },
+            "top2": {
+              "type": "number",
+              "example": 9 
+            },
+            "top3": {
+              "type": "number",
+              "example": 8 
+            }
           }
-        }  
-      },
-      "HookConfig": {
-        "type": "object",
-        "properties": {
-          "Config": {
-            "type": "string",
-            "example": "Successful"
-          }
-        }  
+        }
       },
       "Error": {
         "type": "object",

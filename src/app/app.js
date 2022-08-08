@@ -1,7 +1,10 @@
+import  { readFile } from 'fs/promises';
 import express, { Router } from 'express';
 import Routes from './router.js';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import swagger from 'swagger-ui-express';
+const apiSchema = JSON.parse( await readFile(new URL("../api.schema.json", import.meta.url)));
 
 export class App {
     constructor(){
@@ -15,12 +18,17 @@ export class App {
       this.server = express();
       this.middlewares();
       this.routes();
+      this.docsSetup()
     }
     
     middlewares(){
         this.server.use(bodyParser.json());
         this.server.use(bodyParser.urlencoded({ extended: false }));
         this.server.use(cors());
+    }
+
+    async docsSetup () {
+      this.server.use(`/${this.appName}/${this.version}/docs`, swagger.serveFiles(apiSchema), swagger.setup(apiSchema));
     }
 
     routes(){
